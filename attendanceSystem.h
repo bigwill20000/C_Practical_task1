@@ -6,23 +6,24 @@ typedef enum
     winter, Summer
 } season;
 
-typedef struct
+typedef struct student
 {
     char *firstName;
     char *lastName;
     int matriculationNumber;
-    char *degreeProgram;
-    char *coursesAttended;
-    
+    degreeProgram *DegreeProgram;
+    course coursesAttended;
+    struct  student *next;
 }student;
 
-typedef struct
+typedef struct instructor
 {
     char *firstName;
     char *lastName;
     char *academicGrade;
     char *faculty;
     course courseTaught;
+    struct instructor *next;
 }instructor;
 
 typedef struct 
@@ -38,12 +39,12 @@ typedef struct
 }semester;
 
 
-typedef struct 
+typedef struct course
 {
     int courseID;
     char *courseName;
     semester Semester;
-
+    struct course *next;
 }course;
 
 #endif
