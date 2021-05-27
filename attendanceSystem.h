@@ -10,7 +10,7 @@ typedef struct
 {
     char *firstName;
     char *lastName;
-    int matriNumber;
+    int matriculationNumber;
     char *degreeProgram;
     char *coursesAttended;
     
