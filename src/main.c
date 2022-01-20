@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../includes/attendance.h";
+#include "../includes/attendance.h"
+#include "../includes/instructors.h"
+#include "../includes/student.h"
 
 
 int main()
