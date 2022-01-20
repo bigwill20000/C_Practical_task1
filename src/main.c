@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../includes/attendance.h"
 #include "../includes/instructors.h"
 #include "../includes/student.h"
 
@@ -10,7 +9,6 @@ int main()
     //Declare link lists
     STUDENT* students = NULL;
     INSTRUCTOR* instructors = NULL;
-    COURSE* courses = NULL;
 
     //Initialize linked lists
     students = (STUDENT*) (malloc(sizeof(STUDENT) * 3));
