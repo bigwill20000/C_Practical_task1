@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "instructors.h"
+#include "instructor.h"
 
 /*void start_Program(int *choice)
 {
@@ -129,19 +129,19 @@ void append(INSTRUCTOR *instructor)
     instructor->LastName[strlen(instructor->LastName)-1] = 0;
 
     printf("Input instructor's Course : ");
-    fgets(instructor->Course, 100, stdin);
-    instructor->Course[strlen(instructor->Course)-1] = 0;
+    fgets(instructor->Course.CourseName, 100, stdin);
+    instructor->Course.CourseName[strlen(instructor->Course.CourseName)-1] = 0;
     
     printf("Input instructor's Faculty : ");
     fgets(instructor->Faculty, 100, stdin);
     instructor->Faculty[strlen(instructor->Faculty)-1] = 0;
 
     printf("Input the Session (insert 'w'or'W','s'or'S') : ");
-    instructor->Session = input_season(session);
+    instructor->semester.session = input_season(session);
     fgetc(stdin);
 
     printf("Input Academic year : ");
-    scanf("%d", &(instructor->Year));
+    scanf("%d", &(instructor->semester.Year));
     fgetc(stdin);
     
     instructor->next = NULL;
@@ -318,15 +318,15 @@ void display(INSTRUCTOR* instructor)
 
     printf("Fist Name : %s\n", instructor->FirstName);
     printf("Last Name : %s\n", instructor->LastName);
-    printf("Lecture : %s\n",instructor->Course);
+    printf("Lecture : %s\n",instructor->Course.CourseName);
     printf("Faculty : %s\n", instructor->Faculty);
 
-    if(instructor->Session == winter)
+    if(instructor->semester.session == winter)
         printf("Session : Winter Session\n");
     else 
         printf("Session : Summer Session\n");
 
-    printf("Academic year : %d\n",instructor->Year);
+    printf("Academic year : %d\n",instructor->semester.Year);
     
     printf("\n");    
 }

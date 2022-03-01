@@ -6,7 +6,7 @@ typedef enum session
     winter, summer
 } SESSION;
 
-typedef struct STUDENT
+typedef struct student
 {
     int ID;
     char firstName[100];
