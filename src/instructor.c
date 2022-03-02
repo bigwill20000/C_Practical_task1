@@ -33,9 +33,9 @@ INSTRUCTOR *add(INSTRUCTOR *list)
     append(newInstructor);
 
     if(list == NULL)
-        list = newInstructor;
+        list = newInstructor; //update the head list
     else
-        list = insert_methods(list,newInstructor);//update the head list
+        list = insert_methods(list,newInstructor);
     return list;
 }
 
@@ -49,7 +49,7 @@ INSTRUCTOR *insert_begin(INSTRUCTOR *list, INSTRUCTOR *newInstructor)
 INSTRUCTOR *insert_pos(INSTRUCTOR *list, INSTRUCTOR *newInstructor)
 {
     int pos, i;
-    INSTRUCTOR *ptr = 0;
+    INSTRUCTOR *ptr = NULL;
     printf("Input the position of the new node : ");
     scanf("%d", &pos);
     if(pos == 0)
@@ -112,12 +112,9 @@ void append(INSTRUCTOR *instructor)
 {
     SESSION session = 0;
     GRADE grade = 0;
+
     printf("Input instructor ID : ");
     scanf("%d", &(instructor->ID));
-    fgetc(stdin);
-
-    printf("Input Grade (insert 'b'or'B','m'or'M','d'or'D') : ");
-    instructor->Grade = input_grade(grade);
     fgetc(stdin);
 
     printf("Input instructor's First Name : ");
@@ -128,20 +125,28 @@ void append(INSTRUCTOR *instructor)
     fgets(instructor->LastName, 100, stdin);
     instructor->LastName[strlen(instructor->LastName)-1] = 0;
 
-    printf("Input instructor's Course : ");
-    fgets(instructor->Course.CourseName, 100, stdin);
-    instructor->Course.CourseName[strlen(instructor->Course.CourseName)-1] = 0;
-    
     printf("Input instructor's Faculty : ");
     fgets(instructor->Faculty, 100, stdin);
     instructor->Faculty[strlen(instructor->Faculty)-1] = 0;
 
+    printf("Input Course's ID : ");
+    scanf("%d", &(instructor->Course.CourseID));
+    fgetc(stdin);
+
+    printf("Input Course's Name : ");
+    fgets(instructor->Course.CourseName, 100, stdin);
+    instructor->Course.CourseName[strlen(instructor->Course.CourseName)-1] = 0;
+    
     printf("Input the Session (insert 'w'or'W','s'or'S') : ");
     instructor->semester.session = input_season(session);
     fgetc(stdin);
 
     printf("Input Academic year : ");
     scanf("%d", &(instructor->semester.Year));
+    fgetc(stdin);
+
+    printf("Input Grade (insert 'b'or'B','m'or'M','d'or'D') : ");
+    instructor->Grade = input_grade(grade);
     fgetc(stdin);
     
     instructor->next = NULL;
@@ -307,18 +312,19 @@ INSTRUCTOR *delete_methods(INSTRUCTOR *list)
 void display(INSTRUCTOR* instructor)
 {
 
-    printf("id : %d\n",instructor->ID);
+    printf("Instructor's ID : %d\n",instructor->ID);
 
     if(instructor->Grade == bachelor)
-        printf("Grade : Bachelor\n");
+        printf("Instructor's Grade : Bachelor\n");
     else if (instructor->Grade == master)
-        printf("Grade : Master\n");
+        printf("Instructor's Grade : Master\n");
     else
-        printf("Grade : Doctorate\n");
+        printf("Instructor's Grade : Doctorate\n");
 
     printf("Fist Name : %s\n", instructor->FirstName);
     printf("Last Name : %s\n", instructor->LastName);
-    printf("Lecture : %s\n",instructor->Course.CourseName);
+    printf("Course's ID: %d\n", instructor->Course.CourseID);
+    printf("Course's Name : %s\n",instructor->Course.CourseName);
     printf("Faculty : %s\n", instructor->Faculty);
 
     if(instructor->semester.session == winter)

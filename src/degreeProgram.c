@@ -36,15 +36,15 @@ void append(DEGREEPROGRAM *degreeProgram)
     degreeProgram->Name[strlen(degreeProgram->Name)-1] = 0;
 
     printf("Input Degree Program's Course : ");
-    fgets(degreeProgram->Course, 100, stdin);
-    degreeProgram->Course[strlen(degreeProgram->Course)-1] = 0;
+    fgets(degreeProgram->Course.CourseName, 100, stdin);
+    degreeProgram->Course.CourseName[strlen(degreeProgram->Course.CourseName)-1] = 0;
 
     printf("Input Academic year : ");
-    scanf("%d", &(degreeProgram->Year));
+    scanf("%d", &(degreeProgram->semester.Year));
     fgetc(stdin);
 
     printf("Input the Session (insert 'w'or'W','s'or'S') : ");
-    degreeProgram->Session = input_season(session);
+    degreeProgram->semester.session = input_season(session);
     fgetc(stdin);
 
     printf("Input instructor's First Name : ");

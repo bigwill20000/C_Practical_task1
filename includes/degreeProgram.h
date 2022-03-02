@@ -6,15 +6,26 @@ typedef enum session
     winter, summer
 } SESSION;
 
-typedef struct degreeProgram
+typedef struct semester
+{
+    SESSION session;
+    int Year;
+}SEMESTER;
+
+typedef struct course
+{
+    int CourseID;
+    char CourseName[100];
+}COURSE;
+
+typedef struct DEGREEPROGRAM
 {
     int ID;
     char Name[100];
-    char Course[100];
-    int Year;
-    SESSION Session;
     char InstructorFirstName[100];
     char InstructorLastName[100];
+    COURSE Course;
+    SEMESTER semester;
     struct DEGREEPROGRAM *next;
 }DEGREEPROGRAM;
 

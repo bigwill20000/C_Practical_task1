@@ -54,20 +54,24 @@ void append(STUDENT *student)
     fgets(student->lastName, 100, stdin);
     student->lastName[strlen(student->lastName)-1] = 0;
 
-    printf("Input student's Course : ");
-    fgets(student->Course, 100, stdin);
-    student->Course[strlen(student->Course)-1] = 0;
-    
     printf("Input Degree Program  : ");
     fgets(student->Degree_program, 100, stdin);
     student->Degree_program[strlen(student->Degree_program)-1] = 0;
 
+    printf("Input Course's ID : ");
+    scanf("%d", &(student->ID));
+    fgetc(stdin);
+
+    printf("Input Course's Name : ");
+    fgets(student->course.CourseName, 100, stdin);
+    student->course.CourseName[strlen(student->course.CourseName)-1] = 0;
+    
     printf("Input the Session (insert 'w'or'W','s'or'S') : ");
-    student->session = input_season(session);
+    student->semester.session = input_season(session);
     fgetc(stdin);
 
     printf("Input Academic year : ");
-    scanf("%d", &(student->year));
+    scanf("%d", &(student->semester.Year));
     fgetc(stdin);
     
     student->next = NULL;
@@ -108,7 +112,7 @@ STUDENT *insert_begin(STUDENT *list, STUDENT *newStudent)
 STUDENT *insert_pos(STUDENT *list, STUDENT *newStudent)
 {
     int pos, i;
-    STUDENT *ptr = 0;
+    STUDENT *ptr = NULL;
     printf("Input the position of the new node : ");
     scanf("%d", &pos);
     if(pos == 0)
@@ -270,18 +274,19 @@ STUDENT *delete_methods(STUDENT *list)
 void display(STUDENT* student)
 {
 
-    printf("id : %d\n",student->ID);
+    printf("ID : %d\n",student->ID);
     printf("Fist Name : %s\n", student->firstName);
     printf("Last Name : %s\n", student->lastName);
-    printf("Lecture : %s\n",student->Course);
     printf("Degree Program : %s\n",student->Degree_program);
+    printf("Course ID : %d\n",student->ID);
+    printf("Course Name : %s\n",student->course.CourseName);
 
-    if(student->session == winter)
+    if(student->semester.session == winter)
         printf("Session : Winter Session\n");
     else 
         printf("Session : Summer Session\n");
 
-    printf("Academic year : %d\n",student->year);
+    printf("Academic year : %d\n",student->semester.Year);
     
     printf("\n");    
 }
@@ -296,7 +301,7 @@ void display_list(STUDENT *list)
     }
     
     ptr = list;
-    printf("\t\tThe list of instructors :\t\t\n");
+    printf("\t\tThe list of Students :\t\t\n");
     printf("\t\t=======================\t\t\n\n");
     while (ptr != NULL)
     {

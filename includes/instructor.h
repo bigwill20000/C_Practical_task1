@@ -16,10 +16,7 @@ typedef struct course
 {
     int CourseID;
     char CourseName[100];
-    SEMESTER CourseSemerter;
-
 }COURSE;
-
 
 typedef enum grade
 {
@@ -33,8 +30,8 @@ typedef struct INSTRUCTOR
     int ID;
     char FirstName[100];
     char LastName[100];
-    COURSE Course;
     char Faculty[100];
+    COURSE Course;
     SEMESTER semester;
     GRADE Grade;
     struct INSTRUCTOR *next;
