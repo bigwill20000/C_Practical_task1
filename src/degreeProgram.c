@@ -20,13 +20,14 @@ DEGREEPROGRAM *add(DEGREEPROGRAM *list)
     if (list == NULL)
         list = newDegreeProgram;
     else
-        //list = insert_methods(list, newDegreeProgram);
+        list = insert_methods(list, newDegreeProgram);
     return list;
 }
 
 void append(DEGREEPROGRAM *degreeProgram)
 {
     SESSION session = 0;
+
     printf("Input Degree Program ID : ");
     scanf("%d", &(degreeProgram->ID));
     fgetc(stdin);
@@ -35,25 +36,29 @@ void append(DEGREEPROGRAM *degreeProgram)
     fgets(degreeProgram->Name, 100, stdin);
     degreeProgram->Name[strlen(degreeProgram->Name)-1] = 0;
 
-    printf("Input Degree Program's Course : ");
+    printf("Input lecturer's First Name : ");
+    fgets(degreeProgram->InstructorFirstName, 100, stdin);
+    degreeProgram->InstructorFirstName[strlen(degreeProgram->InstructorFirstName)-1] = 0;
+
+    printf("Input lecturer's Last Name : ");
+    fgets(degreeProgram->InstructorLastName, 100, stdin);
+    degreeProgram->InstructorLastName[strlen(degreeProgram->InstructorLastName)-1] = 0;
+
+    printf("Input Program's Course ID : ");
+    scanf("%d", &(degreeProgram->Course.CourseID));
+    fgetc(stdin);
+
+    printf("Input Program's Course Name : ");
     fgets(degreeProgram->Course.CourseName, 100, stdin);
     degreeProgram->Course.CourseName[strlen(degreeProgram->Course.CourseName)-1] = 0;
-
-    printf("Input Academic year : ");
-    scanf("%d", &(degreeProgram->semester.Year));
-    fgetc(stdin);
 
     printf("Input the Session (insert 'w'or'W','s'or'S') : ");
     degreeProgram->semester.session = input_season(session);
     fgetc(stdin);
 
-    printf("Input instructor's First Name : ");
-    fgets(degreeProgram->InstructorFirstName, 100, stdin);
-    degreeProgram->InstructorFirstName[strlen(degreeProgram->InstructorFirstName)-1] = 0;
-
-    printf("Input instructor's Last Name : ");
-    fgets(degreeProgram->InstructorLastName, 100, stdin);
-    degreeProgram->InstructorLastName[strlen(degreeProgram->InstructorLastName)-1] = 0;
+    printf("Input Academic year : ");
+    scanf("%d", &(degreeProgram->semester.Year));
+    fgetc(stdin);
     
     degreeProgram->next = NULL;
 }
@@ -61,13 +66,13 @@ void append(DEGREEPROGRAM *degreeProgram)
 SESSION input_season(SESSION session)
 {
     char ch;
-    scanf(" %c",&ch);// leave a white space before %c 
-                              // to avoid printing twice
+    // leave a white space before %c to avoid printing twice
+    scanf(" %c",&ch); 
     while (ch!='w' && ch!='W' && ch!='s' && ch!='S')
     {
         printf("Input another character : ");
-        scanf(" %c",&ch);// leave a white space before %c 
-                              // to avoid printing twice
+        // leave a white space before %c to avoid printing twice
+        scanf(" %c",&ch); 
     }   
     
     switch (ch)
@@ -150,4 +155,142 @@ DEGREEPROGRAM *insert_end(DEGREEPROGRAM *list, DEGREEPROGRAM *newDegreeProgram)
     ptr->next = newDegreeProgram; 
 
     return list;
+}
+
+DEGREEPROGRAM *delete_begin(DEGREEPROGRAM *list)
+{
+    DEGREEPROGRAM *ptr = NULL;
+    if (list->next == NULL)
+    {
+        free(list);
+        list = NULL;
+    }
+    else
+    {
+        ptr = list;
+        list = list->next;
+        free(ptr);
+    } 
+    return list;
+}
+
+DEGREEPROGRAM *delete_end(DEGREEPROGRAM *list)
+{
+    DEGREEPROGRAM *temp, *ptr;
+
+    if (list->next == NULL)
+    {
+        ptr = list;
+        list = NULL;
+        free(ptr);
+    }
+    else
+    {
+        ptr = list;
+        while (ptr->next!=NULL)
+        {
+            temp = ptr;
+            ptr = ptr->next;
+        }
+        temp->next = NULL;
+        free(ptr);
+    }
+    return list; 
+}
+
+DEGREEPROGRAM *delete_pos(DEGREEPROGRAM *list)
+{
+    int i, pos;
+    DEGREEPROGRAM *temp, *ptr;
+    printf("Input the position to be deleted: ");
+    scanf("%d",&pos);
+
+    if (pos==0)
+    {
+        list = delete_begin(list);
+    }
+    else
+    {
+        ptr = list;
+        for(i=0;i<pos;i++)
+        {
+            temp = ptr;
+            ptr = ptr->next;
+            if (ptr==NULL)
+            {
+                printf("Position not Found!\n");
+                exit(0);
+            }
+        }
+        temp->next = ptr->next;
+        free(ptr);
+    }
+    return list;
+}
+
+DEGREEPROGRAM *delete_methods(DEGREEPROGRAM *list)
+{
+    int method;
+    if(list == NULL)
+    {
+        printf("List is Empty!\n\n"); 
+        exit(0);
+    }
+    
+    printf("\nDelete-methods : \n");
+    printf("1 - Delete at the begining.\n");
+    printf("2 - Delete at a specified position.\n");
+    printf("3 - Delete at the end.\n");
+    printf("Input your method : ");
+    scanf("%d", &method);
+    while (method!=1 && method!=2 && method!=3)
+    {
+        printf("Try again : ");
+        scanf("%d", &method);
+    }
+    if (method == 1)
+        list = delete_begin(list);
+    else if(method == 2)
+        list = delete_pos(list);
+    else
+        list = delete_end(list); 
+    return list;
+}
+
+void display(DEGREEPROGRAM *degreeProgram)
+{
+    printf("Program's ID : %d\n",degreeProgram->ID);
+    printf("Degree's Name : %s\n", degreeProgram->Name);
+    printf("Lecturer's First Name : %s\n", degreeProgram->InstructorFirstName);
+    printf("Lecturer's Last Name : %s\n", degreeProgram->InstructorLastName);
+    printf("Course's ID: %d\n", degreeProgram->Course.CourseID);
+    printf("Course's Name : %s\n", degreeProgram->Course.CourseName);
+
+    if(degreeProgram->semester.session == winter)
+        printf("Session : Winter Session\n");
+    else 
+        printf("Session : Summer Session\n");
+
+    printf("Academic year : %d\n",degreeProgram->semester.Year);
+    
+    printf("\n");    
+}
+
+void display_list(DEGREEPROGRAM *list)
+{
+    DEGREEPROGRAM *ptr = NULL;
+    if(list == NULL)
+    {
+        printf("List is Empty!\n\n"); 
+        exit(0);
+    }
+    
+    ptr = list;
+    printf("\t\tThe list of Degree Programs :\t\t\n");
+    printf("\t\t=======================\t\t\n\n");
+    while (ptr != NULL)
+    {
+        display(ptr);
+        ptr = ptr->next;
+    } 
 }

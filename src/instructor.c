@@ -226,6 +226,7 @@ INSTRUCTOR *delete_begin(INSTRUCTOR *list)
     } 
     return list;
 }
+
 INSTRUCTOR *delete_end(INSTRUCTOR *list)
 {
     INSTRUCTOR *temp, *ptr;
