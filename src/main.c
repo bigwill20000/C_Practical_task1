@@ -18,6 +18,16 @@ int main()
     DEGREEPROGRAM degreeProgram;
     STUDENT student;
 
+    DEGREEPROGRAM *firstDP = addDegreeProgram(firstDP);
+    DEGREEPROGRAM *secondDP = addDegreeProgram(firstDP);
+    DEGREEPROGRAM *thirdDP = addDegreeProgram(firstDP);
+
+    appendInstructor(&instructor);
+    appendDegreeProgram(&degreeProgram);
+
+    void retrieveCourses(DEGREEPROGRAM *DPlist, 
+        DEGREEPROGRAM degreeProgram, INSTRUCTOR instructor);
+
     
     //Initialize linked lists
     //students = (STUDENT*) (malloc(sizeof(STUDENT) * 3));    

@@ -18,7 +18,7 @@
     getchar();
 }*/
 
-INSTRUCTOR *create(INSTRUCTOR *instructor)
+INSTRUCTOR *createInstructor(INSTRUCTOR *instructor)
 {
     instructor = (INSTRUCTOR*)malloc(sizeof(INSTRUCTOR));
     if(instructor == NULL)
@@ -26,34 +26,34 @@ INSTRUCTOR *create(INSTRUCTOR *instructor)
     return instructor;
 }
 
-INSTRUCTOR *add(INSTRUCTOR *list)
+INSTRUCTOR *addInstructor(INSTRUCTOR *list)
 {
     INSTRUCTOR *newInstructor = NULL;
-    newInstructor = create(newInstructor); // to be passed in the insert method
-    append(newInstructor);
+    newInstructor = createInstructor(newInstructor); // to be passed in the insert method
+    appendInstructor(newInstructor);
 
     if(list == NULL)
         list = newInstructor; //update the head list
     else
-        list = insert_methods(list,newInstructor);
+        list = insertInstructor_methods(list,newInstructor);
     return list;
 }
 
-INSTRUCTOR *insert_begin(INSTRUCTOR *list, INSTRUCTOR *newInstructor)
+INSTRUCTOR *insertInstructor_begin(INSTRUCTOR *list, INSTRUCTOR *newInstructor)
 {
     newInstructor->next = list;
     list = newInstructor;
     return list;
 } 
 
-INSTRUCTOR *insert_pos(INSTRUCTOR *list, INSTRUCTOR *newInstructor)
+INSTRUCTOR *insertInstructor_pos(INSTRUCTOR *list, INSTRUCTOR *newInstructor)
 {
     int pos, i;
     INSTRUCTOR *ptr = NULL;
     printf("Input the position of the new node : ");
     scanf("%d", &pos);
     if(pos == 0)
-        list = insert_begin(list,newInstructor);    
+        list = insertInstructor_begin(list,newInstructor);    
     else
     {
         for(i=0,ptr=list;i<pos-1;i++)
@@ -71,7 +71,7 @@ INSTRUCTOR *insert_pos(INSTRUCTOR *list, INSTRUCTOR *newInstructor)
     return list;
 }
 
-INSTRUCTOR *insert_end(INSTRUCTOR *list, INSTRUCTOR *newInstructor)
+INSTRUCTOR *insertInstructor_end(INSTRUCTOR *list, INSTRUCTOR *newInstructor)
 {
     INSTRUCTOR *ptr = NULL;
 
@@ -85,13 +85,13 @@ INSTRUCTOR *insert_end(INSTRUCTOR *list, INSTRUCTOR *newInstructor)
     return list;
 }
 
-INSTRUCTOR *insert_methods(INSTRUCTOR *list, INSTRUCTOR *newInstructor)
+INSTRUCTOR *insertInstructor_methods(INSTRUCTOR *list, INSTRUCTOR *newInstructor)
 {
     int method;
-    printf("\nInsert-methods : \n");
-    printf("1 - insert at the begining.\n");
-    printf("2 - insert at a specified position.\n");
-    printf("3 - insert at the end.\n");
+    printf("\nInsert Instructor Methods : \n");
+    printf("1 - insert Instructor at the begining.\n");
+    printf("2 - insert Instructor at a specified position.\n");
+    printf("3 - insert Instructor at the end.\n");
     printf("Input your method : ");
     scanf("%d", &method);
     while (method!=1 && method!=2 && method!=3)
@@ -100,15 +100,15 @@ INSTRUCTOR *insert_methods(INSTRUCTOR *list, INSTRUCTOR *newInstructor)
         scanf("%d", &method);
     }
     if (method == 1)
-        list = insert_begin(list,newInstructor); //update head list
+        list = insertInstructor_begin(list,newInstructor); //update head list
     else if(method == 2)
-        list = insert_pos(list,newInstructor); // can also be void
+        list = insertInstructor_pos(list,newInstructor); // can also be void
     else
-        list = insert_end(list, newInstructor); // can also be void
+        list = insertInstructor_end(list, newInstructor); // can also be void
     return list;  
 }
 
-void append(INSTRUCTOR *instructor)
+void appendInstructor(INSTRUCTOR *instructor)
 {
     SESSION session = 0;
     GRADE grade = 0;
@@ -138,7 +138,7 @@ void append(INSTRUCTOR *instructor)
     instructor->Course.CourseName[strlen(instructor->Course.CourseName)-1] = 0;
     
     printf("Input the Session (insert 'w'or'W','s'or'S') : ");
-    instructor->semester.session = input_season(session);
+    instructor->semester.session = inputInstructor_season(session);
     fgetc(stdin);
 
     printf("Input Academic year : ");
@@ -146,22 +146,23 @@ void append(INSTRUCTOR *instructor)
     fgetc(stdin);
 
     printf("Input Grade (insert 'b'or'B','m'or'M','d'or'D') : ");
-    instructor->Grade = input_grade(grade);
+    instructor->Grade = inputInstructor_grade(grade);
     fgetc(stdin);
     
     instructor->next = NULL;
 }
 
-SESSION input_season(SESSION session)
+SESSION inputInstructor_season(SESSION session)
 {
     char ch;
-    scanf(" %c",&ch);// leave a white space before %c 
-                              // to avoid printing twice
+    // leave a white space before %c to avoid printing twice
+    scanf(" %c",&ch); 
+
     while (ch!='w' && ch!='W' && ch!='s' && ch!='S')
     {
         printf("Input another character : ");
-        scanf(" %c",&ch);// leave a white space before %c 
-                              // to avoid printing twice
+        // leave a white space before %c to avoid printing twice
+        scanf(" %c",&ch); 
     }   
     
     switch (ch)
@@ -178,18 +179,18 @@ SESSION input_season(SESSION session)
     return session;
 }
 
-GRADE input_grade(GRADE grade)
+GRADE inputInstructor_grade(GRADE grade)
 {
     char ch;
-    scanf(" %c",&ch); // leave a white space before %c 
-                              // to avoid printing twice
+    // leave a white space before %c to avoid printing twice
+    scanf(" %c",&ch);  
 
     while (ch!='b' && ch!='B' && ch!='m' && ch!='M'
             && ch!='d' && ch!='D')
         {
             printf("Input another character:");
-            scanf(" %c",&ch); // leave a white space before %c 
-                              // to avoid printing twice
+            // leave a white space before %c to avoid printing twice
+            scanf(" %c",&ch);
         }
 
     switch (ch)
@@ -210,7 +211,7 @@ GRADE input_grade(GRADE grade)
     return grade;
 }
 
-INSTRUCTOR *delete_begin(INSTRUCTOR *list)
+INSTRUCTOR *deleteInstructor_begin(INSTRUCTOR *list)
 {
     INSTRUCTOR *ptr = NULL;
     if (list->next == NULL)
@@ -227,7 +228,7 @@ INSTRUCTOR *delete_begin(INSTRUCTOR *list)
     return list;
 }
 
-INSTRUCTOR *delete_end(INSTRUCTOR *list)
+INSTRUCTOR *deleteInstructor_end(INSTRUCTOR *list)
 {
     INSTRUCTOR *temp, *ptr;
 
@@ -251,7 +252,7 @@ INSTRUCTOR *delete_end(INSTRUCTOR *list)
     return list; 
 }
 
-INSTRUCTOR *delete_pos(INSTRUCTOR *list)
+INSTRUCTOR *deleteInstructor_pos(INSTRUCTOR *list)
 {
     int i, pos;
     INSTRUCTOR *temp, *ptr;
@@ -260,7 +261,7 @@ INSTRUCTOR *delete_pos(INSTRUCTOR *list)
 
     if (pos==0)
     {
-        list = delete_begin(list);
+        list = deleteInstructor_begin(list);
     }
     else
     {
@@ -281,7 +282,7 @@ INSTRUCTOR *delete_pos(INSTRUCTOR *list)
     return list;
 }
 
-INSTRUCTOR *delete_methods(INSTRUCTOR *list)
+INSTRUCTOR *deleteInstructor_methods(INSTRUCTOR *list)
 {
     int method;
     if(list == NULL)
@@ -291,10 +292,11 @@ INSTRUCTOR *delete_methods(INSTRUCTOR *list)
     }
     
     printf("\nDelete-methods : \n");
-    printf("1 - Delete at the begining.\n");
-    printf("2 - Delete at a specified position.\n");
-    printf("3 - Delete at the end.\n");
-    printf("Input your method : ");
+    printf("1 - Delete Instructor at the begining.\n");
+    printf("2 - Delete Instructor at a specified position.\n");
+    printf("3 - Delete Instructor at the end.\n");
+    printf("Input your delete Instructor method : ");
+    
     scanf("%d", &method);
     while (method!=1 && method!=2 && method!=3)
     {
@@ -302,15 +304,15 @@ INSTRUCTOR *delete_methods(INSTRUCTOR *list)
         scanf("%d", &method);
     }
     if (method == 1)
-        list = delete_begin(list);
+        list = deleteInstructor_begin(list);
     else if(method == 2)
-        list = delete_pos(list);
+        list = deleteInstructor_pos(list);
     else
-        list = delete_end(list); 
+        list = deleteInstructor_end(list); 
     return list;
 }
 
-void display(INSTRUCTOR* instructor)
+void displayInstructor(INSTRUCTOR* instructor)
 {
 
     printf("Instructor's ID : %d\n",instructor->ID);
@@ -338,7 +340,7 @@ void display(INSTRUCTOR* instructor)
     printf("\n");    
 }
 
-void display_list(INSTRUCTOR *list)
+void displayInstructor_list(INSTRUCTOR *list)
 {
     INSTRUCTOR *ptr = NULL;
     if(list == NULL)
@@ -352,7 +354,7 @@ void display_list(INSTRUCTOR *list)
     printf("\t\t=======================\t\t\n\n");
     while (ptr != NULL)
     {
-        display(ptr);
+        displayInstructor(ptr);
         ptr = ptr->next;
     } 
 }

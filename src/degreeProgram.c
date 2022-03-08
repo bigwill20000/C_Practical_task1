@@ -3,7 +3,7 @@
 #include <string.h>
 #include "degreeProgram.h"
 
-DEGREEPROGRAM *create(DEGREEPROGRAM *degreeProgram)
+DEGREEPROGRAM *createDegreeProgram(DEGREEPROGRAM *degreeProgram)
 {
     degreeProgram = (DEGREEPROGRAM*)malloc(sizeof(DEGREEPROGRAM));
     if(degreeProgram == NULL)
@@ -11,20 +11,20 @@ DEGREEPROGRAM *create(DEGREEPROGRAM *degreeProgram)
     return degreeProgram;
 }
 
-DEGREEPROGRAM *add(DEGREEPROGRAM *list)
+DEGREEPROGRAM *addDegreeProgram(DEGREEPROGRAM *list)
 {
     DEGREEPROGRAM *newDegreeProgram = NULL;
-    newDegreeProgram = create(newDegreeProgram);
-    append(newDegreeProgram);
+    newDegreeProgram = createDegreeProgram(newDegreeProgram);
+    appendDegreeProgram(newDegreeProgram);
 
     if (list == NULL)
         list = newDegreeProgram;
     else
-        list = insert_methods(list, newDegreeProgram);
+        list = insertDegreeProgram_methods(list, newDegreeProgram);
     return list;
 }
 
-void append(DEGREEPROGRAM *degreeProgram)
+void appendDegreeProgram(DEGREEPROGRAM *degreeProgram)
 {
     SESSION session = 0;
 
@@ -53,7 +53,7 @@ void append(DEGREEPROGRAM *degreeProgram)
     degreeProgram->Course.CourseName[strlen(degreeProgram->Course.CourseName)-1] = 0;
 
     printf("Input the Session (insert 'w'or'W','s'or'S') : ");
-    degreeProgram->semester.session = input_season(session);
+    degreeProgram->semester.session = inputDegreeProgram_season(session);
     fgetc(stdin);
 
     printf("Input Academic year : ");
@@ -63,7 +63,7 @@ void append(DEGREEPROGRAM *degreeProgram)
     degreeProgram->next = NULL;
 }
 
-SESSION input_season(SESSION session)
+SESSION inputDegreeProgram_season(SESSION session)
 {
     char ch;
     // leave a white space before %c to avoid printing twice
@@ -89,14 +89,14 @@ SESSION input_season(SESSION session)
     return session;
 }
 
-DEGREEPROGRAM *insert_methods(DEGREEPROGRAM *list, DEGREEPROGRAM *newDegreeProgram)
+DEGREEPROGRAM *insertDegreeProgram_methods(DEGREEPROGRAM *list, DEGREEPROGRAM *newDegreeProgram)
 {
     int method;
-    printf("\nInsert-methods : \n");
-    printf("1 - insert at the begining.\n");
-    printf("2 - insert at a specified position.\n");
-    printf("3 - insert at the end.\n");
-    printf("Input your method : ");
+    printf("\nInsert DegreeProgram Methods : \n");
+    printf("1 - insert DegreeProgram at the begining.\n");
+    printf("2 - insert DegreeProgram at a specified position.\n");
+    printf("3 - insert DegreeProgram at the end.\n");
+    printf("Input your Insert method : ");
     scanf("%d", &method);
     while (method!=1 && method!=2 && method!=3)
     {
@@ -104,29 +104,29 @@ DEGREEPROGRAM *insert_methods(DEGREEPROGRAM *list, DEGREEPROGRAM *newDegreeProgr
         scanf("%d", &method);
     }
     if (method == 1)
-        list = insert_begin(list,newDegreeProgram); //update head list
+        list = insertDegreeProgram_begin(list,newDegreeProgram); //update head list
     else if(method == 2)
-        list = insert_pos(list,newDegreeProgram); // can also be void
+        list = insertDegreeProgram_pos(list,newDegreeProgram); // can also be void
     else
-        list = insert_end(list, newDegreeProgram); // can also be void
+        list = insertDegreeProgram_end(list, newDegreeProgram); // can also be void
     return list;  
 }
 
-DEGREEPROGRAM *insert_begin(DEGREEPROGRAM *list, DEGREEPROGRAM *newDegreeProgram)
+DEGREEPROGRAM *insertDegreeProgram_begin(DEGREEPROGRAM *list, DEGREEPROGRAM *newDegreeProgram)
 {
     newDegreeProgram->next = list;
     list = newDegreeProgram;
     return list;
 }
 
-DEGREEPROGRAM *insert_pos(DEGREEPROGRAM *list, DEGREEPROGRAM *newDegreeProgram)
+DEGREEPROGRAM *insertDegreeProgram_pos(DEGREEPROGRAM *list, DEGREEPROGRAM *newDegreeProgram)
 {
     int pos, i;
     DEGREEPROGRAM *ptr = 0;
     printf("Input the position of the new node : ");
     scanf("%d", &pos);
     if(pos == 0)
-        list = insert_begin(list, newDegreeProgram);    
+        list = insertDegreeProgram_begin(list, newDegreeProgram);    
     else
     {
         for(i=0,ptr=list;i<pos-1;i++)
@@ -144,7 +144,7 @@ DEGREEPROGRAM *insert_pos(DEGREEPROGRAM *list, DEGREEPROGRAM *newDegreeProgram)
     return list;
 }
 
-DEGREEPROGRAM *insert_end(DEGREEPROGRAM *list, DEGREEPROGRAM *newDegreeProgram)
+DEGREEPROGRAM *insertDegreeProgram_end(DEGREEPROGRAM *list, DEGREEPROGRAM *newDegreeProgram)
 {
     DEGREEPROGRAM *ptr = NULL;
     ptr = list;
@@ -157,7 +157,7 @@ DEGREEPROGRAM *insert_end(DEGREEPROGRAM *list, DEGREEPROGRAM *newDegreeProgram)
     return list;
 }
 
-DEGREEPROGRAM *delete_begin(DEGREEPROGRAM *list)
+DEGREEPROGRAM *deleteDegreeProgram_begin(DEGREEPROGRAM *list)
 {
     DEGREEPROGRAM *ptr = NULL;
     if (list->next == NULL)
@@ -174,7 +174,7 @@ DEGREEPROGRAM *delete_begin(DEGREEPROGRAM *list)
     return list;
 }
 
-DEGREEPROGRAM *delete_end(DEGREEPROGRAM *list)
+DEGREEPROGRAM *deleteDegreeProgram_end(DEGREEPROGRAM *list)
 {
     DEGREEPROGRAM *temp, *ptr;
 
@@ -198,7 +198,7 @@ DEGREEPROGRAM *delete_end(DEGREEPROGRAM *list)
     return list; 
 }
 
-DEGREEPROGRAM *delete_pos(DEGREEPROGRAM *list)
+DEGREEPROGRAM *deleteDegreeProgram_pos(DEGREEPROGRAM *list)
 {
     int i, pos;
     DEGREEPROGRAM *temp, *ptr;
@@ -207,7 +207,7 @@ DEGREEPROGRAM *delete_pos(DEGREEPROGRAM *list)
 
     if (pos==0)
     {
-        list = delete_begin(list);
+        list = deleteDegreeProgram_begin(list);
     }
     else
     {
@@ -228,7 +228,7 @@ DEGREEPROGRAM *delete_pos(DEGREEPROGRAM *list)
     return list;
 }
 
-DEGREEPROGRAM *delete_methods(DEGREEPROGRAM *list)
+DEGREEPROGRAM *deleteDegreeProgram_methods(DEGREEPROGRAM *list)
 {
     int method;
     if(list == NULL)
@@ -237,11 +237,11 @@ DEGREEPROGRAM *delete_methods(DEGREEPROGRAM *list)
         exit(0);
     }
     
-    printf("\nDelete-methods : \n");
-    printf("1 - Delete at the begining.\n");
-    printf("2 - Delete at a specified position.\n");
-    printf("3 - Delete at the end.\n");
-    printf("Input your method : ");
+    printf("\nDelete Degree Program Methods : \n");
+    printf("1 - Delete DegreeProgram at the begining.\n");
+    printf("2 - Delete DegreeProgram at a specified position.\n");
+    printf("3 - Delete DegreeProgram at the end.\n");
+    printf("Input your delete Degree_Program method : ");
     scanf("%d", &method);
     while (method!=1 && method!=2 && method!=3)
     {
@@ -249,15 +249,15 @@ DEGREEPROGRAM *delete_methods(DEGREEPROGRAM *list)
         scanf("%d", &method);
     }
     if (method == 1)
-        list = delete_begin(list);
+        list = deleteDegreeProgram_begin(list);
     else if(method == 2)
-        list = delete_pos(list);
+        list = deleteDegreeProgram_pos(list);
     else
-        list = delete_end(list); 
+        list = deleteDegreeProgram_end(list); 
     return list;
 }
 
-void display(DEGREEPROGRAM *degreeProgram)
+void displayDegreeProgram(DEGREEPROGRAM *degreeProgram)
 {
     printf("Program's ID : %d\n",degreeProgram->ID);
     printf("Degree's Name : %s\n", degreeProgram->Name);
@@ -276,7 +276,7 @@ void display(DEGREEPROGRAM *degreeProgram)
     printf("\n");    
 }
 
-void display_list(DEGREEPROGRAM *list)
+void displayDegreeProgram_list(DEGREEPROGRAM *list)
 {
     DEGREEPROGRAM *ptr = NULL;
     if(list == NULL)
@@ -290,7 +290,7 @@ void display_list(DEGREEPROGRAM *list)
     printf("\t\t=======================\t\t\n\n");
     while (ptr != NULL)
     {
-        display(ptr);
+        displayDegreeProgram(ptr);
         ptr = ptr->next;
     } 
 }

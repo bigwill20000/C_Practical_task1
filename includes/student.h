@@ -30,22 +30,22 @@ typedef struct STUDENT
 }STUDENT;
 
 //void start_Program(int*);
-STUDENT *create(STUDENT*);
-STUDENT *add(STUDENT*);
-STUDENT *insert_begin(STUDENT*, STUDENT*); 
-STUDENT *insert_pos(STUDENT*,STUDENT*); //can also be void
-STUDENT *insert_end(STUDENT*,STUDENT*); // can also be void
-STUDENT *insert_methods(STUDENT*,STUDENT*);
-void append(STUDENT*);
-SESSION input_season(SESSION);
+STUDENT *createStudent(STUDENT*);
+STUDENT *addStudent(STUDENT*);
+STUDENT *insertStudent_begin(STUDENT*, STUDENT*); 
+STUDENT *insertStudent_pos(STUDENT*,STUDENT*); //can also be void
+STUDENT *insertStudent_end(STUDENT*,STUDENT*); // can also be void
+STUDENT *insertStudent_methods(STUDENT*,STUDENT*);
+void appendStudent(STUDENT*);
+SESSION inputStudent_season(SESSION);
 
-STUDENT *delete_begin(STUDENT*);
-STUDENT *delete_end(STUDENT*);
-STUDENT *delete_pos(STUDENT*);
-STUDENT *delete_methods(STUDENT*);
+STUDENT *deleteStudent_begin(STUDENT*);
+STUDENT *deleteStudent_end(STUDENT*);
+STUDENT *deleteStudent_pos(STUDENT*);
+STUDENT *deleteStudent_methods(STUDENT*);
 
-void display(STUDENT*); 
-void display_list(STUDENT*);
+void displayStudent(STUDENT*); 
+void displayStudent_list(STUDENT*);
 //void delete_entire_list(INSTRUCTOR*)
 
 #endif
