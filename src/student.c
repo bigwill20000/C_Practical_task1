@@ -28,7 +28,7 @@ STUDENT *createStudent(STUDENT *student)
 STUDENT *addStudent(STUDENT* list)
 {
     STUDENT *newStudent = NULL;
-    newStudent = create(newStudent);
+    newStudent = createStudent(newStudent);
     appendStudent(newStudent);
 
     if (list == NULL)
