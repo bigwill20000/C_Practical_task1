@@ -1,22 +1,7 @@
 #ifndef __DEGREEPROGRAM__
 #define __DEGREEPROGRAM__
 
-typedef enum session
-{
-    winter, summer
-} SESSION;
-
-typedef struct semester
-{
-    SESSION session;
-    int Year;
-}SEMESTER;
-
-typedef struct course
-{
-    int CourseID;
-    char CourseName[100];
-}COURSE;
+#include "session_semester_course.h"
 
 typedef struct DEGREEPROGRAM
 {

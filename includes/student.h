@@ -1,22 +1,7 @@
 #ifndef __STUDENT__
 #define  __STUDENT__
 
-typedef enum session
-{
-    winter, summer
-} SESSION;
-
-typedef struct semester
-{
-    SESSION session;
-    int Year;
-}SEMESTER;
-
-typedef struct course
-{
-    int CourseID;
-    char CourseName[100];
-}COURSE;
+#include "session_semester_course.h"
 
 typedef struct STUDENT
 {
@@ -29,7 +14,6 @@ typedef struct STUDENT
     struct STUDENT *next;
 }STUDENT;
 
-//void start_Program(int*);
 STUDENT *createStudent(STUDENT*);
 STUDENT *addStudent(STUDENT*);
 STUDENT *insertStudent_begin(STUDENT*, STUDENT*); 

@@ -1,22 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "instructor.h"
+#include "../includes/session_semester_course.h"
+#include "../includes/instructor.h"
 
-/*void start_Program(int *choice)
-{
-    printf("\t\tMENU\t\t\n");
-    printf("\t\t====\t\t\n");
-    printf("1 - Add Instructor\n");
-    printf("2 - Display Instructors\n");
-    printf("3 - Delete Instructor\n");
-    printf("4 - Exit\n");
-    printf("\t\t====\t\t\n");
-    printf("Input your choice : ");
-    scanf("%d",choice);
-    printf("\n");
-    getchar();
-}*/
 
 INSTRUCTOR *createInstructor(INSTRUCTOR *instructor)
 {

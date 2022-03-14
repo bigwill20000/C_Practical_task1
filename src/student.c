@@ -1,21 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "student.h"
+#include "../includes/session_semester_course.h"
+#include "../includes/student.h"
 
-/*void start_Program(int *choice)
-{
-    printf("\t\tMENU\t\t\n");
-    printf("\t\t====\t\t\n");
-    printf("1 - Add Student\n");
-    printf("2 - Display Students\n");
-    printf("3 - Delete Students\n");
-    printf("4 - Exit\n");
-    printf("\t\t====\t\t\n");
-    printf("Input your choice : ");
-    scanf("%d",choice);
-    printf("\n");
-}*/
 
 STUDENT *createStudent(STUDENT *student)
 {

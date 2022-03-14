@@ -1,22 +1,7 @@
 #ifndef __INSTRUCTOR__
 #define __INSTRUCTOR__
 
-typedef enum session
-{
-    winter, summer
-} SESSION;
-
-typedef struct semester
-{
-    SESSION session;
-    int Year;
-}SEMESTER;
-
-typedef struct course
-{
-    int CourseID;
-    char CourseName[100];
-}COURSE;
+#include "session_semester_course.h"
 
 typedef enum grade
 {
@@ -37,7 +22,6 @@ typedef struct INSTRUCTOR
     struct INSTRUCTOR *next;
 }INSTRUCTOR;
 
-//void start_Program(int*);
 INSTRUCTOR *createInstructor(INSTRUCTOR*);
 INSTRUCTOR *addInstructor(INSTRUCTOR*);
 INSTRUCTOR *insertInstructor_begin(INSTRUCTOR*, INSTRUCTOR*); 

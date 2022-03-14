@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "degreeProgram.h"
+#include "../includes/session_semester_course.h"
+#include "../includes/degreeProgram.h"
 
 DEGREEPROGRAM *createDegreeProgram(DEGREEPROGRAM *degreeProgram)
 {
