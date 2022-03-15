@@ -6,9 +6,11 @@
 #include "student.h"
 #include "session_semester_course.h"
 
-void appendCourse(COURSE *);
-void retrieveCourses(DEGREEPROGRAM *, DEGREEPROGRAM, INSTRUCTOR);
-void retrieveDetailStudents(STUDENT *, COURSE, SEMESTER);
-void retrieveNameStudents(STUDENT *, COURSE, INSTRUCTOR, DEGREEPROGRAM);
+void appendCourse(COURSE *course);
+void appendSemester(SEMESTER *semester);
+SESSION inputSession(SESSION session);
+void retrieveCourses(DEGREEPROGRAM *degreeProgramlist, DEGREEPROGRAM degreeProgram, INSTRUCTOR instructor);
+void retrieveDetailStudents(STUDENT *studentList, COURSE course, SEMESTER semester);
+void retrieveNameStudents(STUDENT *studentList, COURSE course, INSTRUCTOR instructor, DEGREEPROGRAM degreeProgram);
 
 #endif

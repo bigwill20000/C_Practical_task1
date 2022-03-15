@@ -7,26 +7,24 @@
 int main()
 {
     //Declare link lists
-    //STUDENT* studentsList = NULL;
-    //INSTRUCTOR* instructorsList = NULL;
+    STUDENT* studentsList = NULL;
     DEGREEPROGRAM *degreeProgramList = NULL;
     
-    //COURSE course;
+    COURSE course;
+    SEMESTER semester;
     INSTRUCTOR instructor;
     DEGREEPROGRAM degreeProgram;
-    //STUDENT student;
 
     int n = 3;
 
-    /*for (int i = 0; i < n; i++)
+    printf("\n");
+    printf("Create a Student List of Three Elements:\n");
+
+    for (int i = 0; i < n; i++)
     {
         studentsList = addStudent(studentsList);
-    }*/
+    }
     
-    /*for (int i = 0; i < n; i++)
-    {
-        instructorsList = addInstructor(instructorsList);
-    }*/
     printf("\n");
     printf("Create Degree_Program List of Three Elements:\n");
 
@@ -37,18 +35,35 @@ int main()
     }
     
     printf("\n");
-    printf("Input the Info of the Instructor to retrieve his/her Courses\n");
+    printf("Input the infos of the Instructor to retrieve his/her Courses\n");
     appendInstructor(&instructor);
     printf("\n");
 
     printf("Input the infos of the Degree_Program to be searched\n");
     appendDegreeProgram(&degreeProgram);
     printf("\n");
-    //appendStudent(&student);
-    //appendCourse(&course);
+
+    printf("Input the infos of the Course to be searched\n");
+    appendCourse(&course);
+    printf("\n");
+
+    printf("Input the infos of the targeted Semester\n");
+    appendSemester(&semester);
+    printf("\n");
     
     printf("Retrieve all the courses under a specified Instructor:\n");
     retrieveCourses(degreeProgramList, degreeProgram, instructor);
+    printf("\n");
+
+    printf("Retrieve the details of all students for a course"
+           "for a particular semester\n");
+    retrieveDetailStudents(studentsList, course, semester);
+    printf("\n");
+
+    /*printf("Retrieve the name of students of a course given"
+          " given by an instructor for a specified degree program:\n");
+    retrieveNameStudents(studentsList, course, instructor, degreeProgram);
+    printf("\n");*/
 
     return 0;
 }
@@ -64,35 +79,117 @@ void appendCourse(COURSE *course)
     course->CourseName[strlen(course->CourseName)-1] = 0;
 }
 
-void retrieveCourses(DEGREEPROGRAM *DPlist, 
+void appendSemester(SEMESTER *semester)
+{
+    SESSION session = 0;
+    printf("Input the Session (insert 'w'or'W','s'or'S') : ");
+    semester->session = inputSession(session);
+    fgetc(stdin);
+
+    printf("Input Academic year : ");
+    scanf("%d", &(semester->Year));
+    fgetc(stdin);
+}
+
+SESSION inputSession(SESSION session)
+{
+    char ch;
+    // leave a white space before %c to avoid printing twice
+    scanf(" %c",&ch); 
+
+    while (ch!='w' && ch!='W' && ch!='s' && ch!='S')
+    {
+        printf("Input another character : ");
+        // leave a white space before %c to avoid printing twice
+        scanf(" %c",&ch); 
+    }   
+    
+    switch (ch)
+    {
+    case 'w' : session = winter;
+        break;
+    case 'W' : session = winter;
+        break;
+    case 's' : session = summer;
+        break;
+    case 'S' : session = summer;
+        break;
+    }
+    return session;
+}
+
+void retrieveCourses(DEGREEPROGRAM *degreeProgramlist, 
         DEGREEPROGRAM degreeProgram, INSTRUCTOR instructor)
 {
-    DEGREEPROGRAM *DPptr = NULL;
-    int count = 0;
+    DEGREEPROGRAM *degreeProgramPtr = NULL;
+    int countDegreeProgram = 0;
     
-    if (DPlist == NULL)
+    if (degreeProgramlist == NULL)
     {
         printf("There is no Degree_Program list");
         exit(0);
     }
     
-    DPptr = DPlist;
+    degreeProgramPtr = degreeProgramlist;
 
-    while (DPptr != NULL)
+    while (degreeProgramPtr != NULL)
     {
-        if (DPptr->ID == degreeProgram.ID 
-            && strcmp(DPptr->InstructorFirstName, instructor.FirstName) == 0
-            && strcmp(DPptr->InstructorLastName, instructor.LastName) == 0)
+        if (degreeProgramPtr->ID == degreeProgram.ID 
+            && strcmp(degreeProgramPtr->InstructorFirstName, instructor.FirstName) == 0
+            && strcmp(degreeProgramPtr->InstructorLastName, instructor.LastName) == 0)
         {
             printf("Course's ID : %d\nCourse's Name : %s\n",
-            DPptr->Course.CourseID, DPptr->Course.CourseName);
-            count++;
+            degreeProgramPtr->Course.CourseID, degreeProgramPtr->Course.CourseName);
+            countDegreeProgram++;
         }
-        DPptr = DPptr->next;
+        degreeProgramPtr = degreeProgramPtr->next;
     }
 
-    if (count == 0)
+    if (countDegreeProgram == 0)
     {
         printf("No courses found under the specified instructor!\n");
     }
 }
+
+void retrieveDetailStudents(STUDENT *studentList, COURSE course, SEMESTER semester)
+{
+    STUDENT *studentPtr = NULL;
+    int countStudent = 0;
+
+    if (studentList == NULL)
+    {
+        printf("There is no Student List\n");
+        exit(0);
+    }
+
+    studentPtr = studentPtr;
+    
+    while (studentPtr != NULL)
+    {
+        if (studentPtr->course.CourseID == course.CourseID
+            && studentPtr->course.CourseName == course.CourseName
+            && studentPtr->semester.session == semester.session
+            && studentPtr->semester.Year == semester.Year)
+        {
+            printf("%d\n%s\n%s\n%s\n%d\n%s\n%s\n%d\n",
+            studentPtr->ID, studentPtr->firstName, studentPtr->lastName,
+            studentPtr->Degree_program, studentPtr->course.CourseID,
+            studentPtr->course.CourseName, studentPtr->semester.session,
+            studentPtr->semester.Year);
+            countStudent++;
+        }
+
+        studentPtr = studentPtr->next;
+    }
+
+    if (countStudent == 0)
+    {
+        printf("No courses found under the specified instructor!\n");
+    }
+}
+
+/*void retrieveNameStudents(STUDENT *studentList, COURSE course, 
+    INSTRUCTOR instructor, DEGREEPROGRAM degreeProgram)
+{
+
+}*/
