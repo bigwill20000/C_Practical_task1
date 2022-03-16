@@ -60,10 +60,10 @@ int main()
     retrieveDetailStudents(studentsList, course, semester);
     printf("\n");
 
-    /*printf("Retrieve the name of students of a course given"
+    printf("Retrieve the name of students of a course given"
           " given by an instructor for a specified degree program:\n");
-    retrieveNameStudents(studentsList, course, instructor, degreeProgram);
-    printf("\n");*/
+    retrieveNameStudents(studentsList, instructor, degreeProgram);
+    printf("\n");
 
     return 0;
 }
@@ -162,7 +162,7 @@ void retrieveDetailStudents(STUDENT *studentList, COURSE course, SEMESTER semest
         exit(0);
     }
 
-    studentPtr = studentPtr;
+    studentPtr = studentList;
     
     while (studentPtr != NULL)
     {
@@ -171,25 +171,50 @@ void retrieveDetailStudents(STUDENT *studentList, COURSE course, SEMESTER semest
             && studentPtr->semester.session == semester.session
             && studentPtr->semester.Year == semester.Year)
         {
-            printf("%d\n%s\n%s\n%s\n%d\n%s\n%s\n%d\n",
+            printf("Student ID: %d\nStudent's first name: %s\nStudent's last name: %s\n"
+                "Student's degree program: %s\nCourse's ID: %d\n Course's name: %s\n"
+                "Semester's session: %d\nSemester's year: %d\n",
             studentPtr->ID, studentPtr->firstName, studentPtr->lastName,
             studentPtr->Degree_program, studentPtr->course.CourseID,
             studentPtr->course.CourseName, studentPtr->semester.session,
             studentPtr->semester.Year);
             countStudent++;
         }
-
         studentPtr = studentPtr->next;
     }
 
     if (countStudent == 0)
     {
-        printf("No courses found under the specified instructor!\n");
+        printf("No Students' details found under the specified instructor!\n");
     }
 }
 
-/*void retrieveNameStudents(STUDENT *studentList, COURSE course, 
-    INSTRUCTOR instructor, DEGREEPROGRAM degreeProgram)
+void retrieveNameStudents(STUDENT *studentList, INSTRUCTOR instructor, 
+    DEGREEPROGRAM degreeProgram)
 {
+    STUDENT *studentPtr = NULL;
+    int count_student = 0;
 
-}*/
+    if (studentList == NULL)
+    {
+        printf("There is no student List available\n");
+        exit(0);
+    }
+    studentPtr = studentList;
+
+    while (studentPtr != NULL)
+    {
+        if (studentPtr->course.CourseID == instructor.Course.CourseID
+            && studentPtr->course.CourseName == instructor.Course.CourseName
+            && studentPtr->Degree_program == degreeProgram.Name)
+        {
+            printf("Student first name: %s\nStudent's last name: %s\n",
+                studentPtr->firstName, studentPtr->lastName);
+        }
+        studentPtr = studentPtr->next;
+    }
+    if (count_student == 0)
+    {
+        printf("There is no list of students available");
+    }
+}

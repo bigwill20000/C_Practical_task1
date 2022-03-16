@@ -11,6 +11,6 @@ void appendSemester(SEMESTER *semester);
 SESSION inputSession(SESSION session);
 void retrieveCourses(DEGREEPROGRAM *degreeProgramlist, DEGREEPROGRAM degreeProgram, INSTRUCTOR instructor);
 void retrieveDetailStudents(STUDENT *studentList, COURSE course, SEMESTER semester);
-void retrieveNameStudents(STUDENT *studentList, COURSE course, INSTRUCTOR instructor, DEGREEPROGRAM degreeProgram);
+void retrieveNameStudents(STUDENT *studentList, INSTRUCTOR instructor, DEGREEPROGRAM degreeProgram);
 
 #endif

@@ -258,6 +258,25 @@ DEGREEPROGRAM *deleteDegreeProgram_methods(DEGREEPROGRAM *list)
     return list;
 }
 
+void delete_entire_listDegreeProgram(DEGREEPROGRAM *list)
+{
+    DEGREEPROGRAM *ptr = NULL;
+    if(list == NULL)
+    {
+        printf("List is Empty!\n\n"); 
+        exit(0);
+    }
+
+    ptr = list;
+    while (ptr != NULL)
+    {
+        ptr = ptr->next;
+        free(list);
+        list = ptr;
+    }
+    list = NULL;
+}
+
 void displayDegreeProgram(DEGREEPROGRAM *degreeProgram)
 {
     printf("Program's ID : %d\n",degreeProgram->ID);

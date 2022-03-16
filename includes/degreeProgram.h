@@ -27,9 +27,9 @@ DEGREEPROGRAM *deleteDegreeProgram_begin(DEGREEPROGRAM*);
 DEGREEPROGRAM *deleteDegreeProgram_end(DEGREEPROGRAM*);
 DEGREEPROGRAM *deleteDegreeProgram_pos(DEGREEPROGRAM*);
 DEGREEPROGRAM *deleteDegreeProgram_methods(DEGREEPROGRAM*);
+void delete_entire_listDegreeProgram(DEGREEPROGRAM*);
 
 void displayDegreeProgram(DEGREEPROGRAM*);
 void displayDegreeProgram_list(DEGREEPROGRAM*);
-////void delete_entire_listDegreeProgram(DEGREEPROGRAM*)
 
 #endif
