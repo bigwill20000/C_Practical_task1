@@ -10,6 +10,7 @@ int main()
     STUDENT* studentsList = NULL;
     DEGREEPROGRAM *degreeProgramList = NULL;
     
+    //Declare variables to be used
     COURSE course;
     SEMESTER semester;
     INSTRUCTOR instructor;
@@ -64,6 +65,9 @@ int main()
           " given by an instructor for a specified degree program:\n");
     retrieveNameStudents(studentsList, instructor, degreeProgram);
     printf("\n");
+
+    delete_entire_listStudent(studentsList);
+    delete_entire_listDegreeProgram(degreeProgramList);
 
     return 0;
 }

@@ -274,7 +274,7 @@ INSTRUCTOR *deleteInstructor_methods(INSTRUCTOR *list)
     int method;
     if(list == NULL)
     {
-        printf("List is Empty!\n\n"); 
+        printf("List of Instructors is Empty!\n\n"); 
         exit(0);
     }
     
@@ -282,10 +282,11 @@ INSTRUCTOR *deleteInstructor_methods(INSTRUCTOR *list)
     printf("1 - Delete Instructor at the begining.\n");
     printf("2 - Delete Instructor at a specified position.\n");
     printf("3 - Delete Instructor at the end.\n");
-    printf("Input your delete Instructor method : ");
-    
+    printf("4 - Delete entire list of Instructors\n");
+    printf("\n- Input your delete Instructor method : ");
+
     scanf("%d", &method);
-    while (method!=1 && method!=2 && method!=3)
+    while (method!=1 && method!=2 && method!=3 && method != 4)
     {
         printf("Try again : ");
         scanf("%d", &method);
@@ -294,9 +295,33 @@ INSTRUCTOR *deleteInstructor_methods(INSTRUCTOR *list)
         list = deleteInstructor_begin(list);
     else if(method == 2)
         list = deleteInstructor_pos(list);
-    else
+    else if(method == 3)
         list = deleteInstructor_end(list); 
+    else
+        delete_entire_listInstructor(list);
     return list;
+}
+
+void delete_entire_listInstructor(INSTRUCTOR *list)
+{
+    INSTRUCTOR *current = list;
+    INSTRUCTOR *next = NULL;
+    if(list == NULL)
+    {
+        printf("List of instructors is Empty!\n\n"); 
+        exit(0);
+    }
+
+    while (current != NULL)
+    {
+        next = current->next;
+        free(current);
+        current = next;
+    }
+    list = NULL;
+    
+    printf("The list of instructors has been emptied!\n");
+    //exit(0);
 }
 
 void displayInstructor(INSTRUCTOR* instructor)

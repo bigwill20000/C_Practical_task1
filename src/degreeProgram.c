@@ -123,7 +123,7 @@ DEGREEPROGRAM *insertDegreeProgram_begin(DEGREEPROGRAM *list, DEGREEPROGRAM *new
 DEGREEPROGRAM *insertDegreeProgram_pos(DEGREEPROGRAM *list, DEGREEPROGRAM *newDegreeProgram)
 {
     int pos, i;
-    DEGREEPROGRAM *ptr = 0;
+    DEGREEPROGRAM *ptr = NULL;
     printf("Input the position of the new node : ");
     scanf("%d", &pos);
     if(pos == 0)
@@ -234,7 +234,7 @@ DEGREEPROGRAM *deleteDegreeProgram_methods(DEGREEPROGRAM *list)
     int method;
     if(list == NULL)
     {
-        printf("List is Empty!\n\n"); 
+        printf("List of Degree_programs is Empty!\n\n"); 
         exit(0);
     }
     
@@ -242,9 +242,11 @@ DEGREEPROGRAM *deleteDegreeProgram_methods(DEGREEPROGRAM *list)
     printf("1 - Delete DegreeProgram at the begining.\n");
     printf("2 - Delete DegreeProgram at a specified position.\n");
     printf("3 - Delete DegreeProgram at the end.\n");
-    printf("Input your delete Degree_Program method : ");
+    printf("4 - Delete entire list of Degree Programs\n");
+    printf("\n- Input your delete Degree_Program method : ");
+
     scanf("%d", &method);
-    while (method!=1 && method!=2 && method!=3)
+    while (method!=1 && method!=2 && method!=3 && method != 4)
     {
         printf("Try again : ");
         scanf("%d", &method);
@@ -253,28 +255,33 @@ DEGREEPROGRAM *deleteDegreeProgram_methods(DEGREEPROGRAM *list)
         list = deleteDegreeProgram_begin(list);
     else if(method == 2)
         list = deleteDegreeProgram_pos(list);
-    else
-        list = deleteDegreeProgram_end(list); 
+    else if(method == 3)
+        list = deleteDegreeProgram_end(list);
+	else
+		delete_entire_listDegreeProgram(list);
     return list;
 }
 
 void delete_entire_listDegreeProgram(DEGREEPROGRAM *list)
 {
-    DEGREEPROGRAM *ptr = NULL;
+    DEGREEPROGRAM *current = list;
+    DEGREEPROGRAM *next = NULL;
     if(list == NULL)
     {
-        printf("List is Empty!\n\n"); 
+        printf("List of degree program is Empty!\n\n"); 
         exit(0);
     }
 
-    ptr = list;
-    while (ptr != NULL)
+    while (current != NULL)
     {
-        ptr = ptr->next;
-        free(list);
-        list = ptr;
+        next = current->next;
+        free(current);
+        current = next;
     }
     list = NULL;
+
+    printf("The list of degree program has been emptied!\n");
+    //exit(0);
 }
 
 void displayDegreeProgram(DEGREEPROGRAM *degreeProgram)

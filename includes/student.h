@@ -27,9 +27,10 @@ STUDENT *deleteStudent_begin(STUDENT*);
 STUDENT *deleteStudent_end(STUDENT*);
 STUDENT *deleteStudent_pos(STUDENT*);
 STUDENT *deleteStudent_methods(STUDENT*);
+void delete_entire_listStudent(STUDENT*);
 
 void displayStudent(STUDENT*); 
 void displayStudent_list(STUDENT*);
-//void delete_entire_list(INSTRUCTOR*)
+
 
 #endif

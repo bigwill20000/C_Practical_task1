@@ -36,9 +36,10 @@ INSTRUCTOR *deleteInstructor_begin(INSTRUCTOR*);
 INSTRUCTOR *deleteInstructor_end(INSTRUCTOR*);
 INSTRUCTOR *deleteInstructor_pos(INSTRUCTOR*);
 INSTRUCTOR *deleteInstructor_methods(INSTRUCTOR*);
+void delete_entire_listInstructor(INSTRUCTOR*);
 
 void displayInstructor(INSTRUCTOR*);
 void displayInstructor_list(INSTRUCTOR*);
-//void delete_entire_listInstructor(INSTRUCTOR*)
+
 
 #endif
