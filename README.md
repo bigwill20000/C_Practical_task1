@@ -1,4 +1,4 @@
-# C_Practical_task1
+# Course attendance system
 
 Programming in C Practical Task I
 Basic Course Attendance System (Sample: can be sligthly modified)
